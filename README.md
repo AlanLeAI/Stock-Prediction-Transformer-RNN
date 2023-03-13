@@ -1,3 +1,3 @@
-# Stock-Prediction-Recurrent-Neural-Network
+# Stock-Prediction-Transformer-Vs-RNN
 
 Run with `python app.py`
