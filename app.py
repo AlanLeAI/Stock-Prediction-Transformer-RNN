@@ -7,6 +7,7 @@ import io
 from io import BytesIO
 from keras.models import load_model
 import matplotlib.pyplot as plt
+from transformer import TransformerEncoder
 
 from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 from matplotlib.figure import Figure
@@ -38,13 +39,12 @@ def predict():
     train_subset = generate_data(train_data, hParams['look_back'])
     val_subset =  generate_data(val_data, hParams['look_back'])
     test_subset =  generate_data(test_data, hParams['look_back'])
-    predictions = buildModel(train_subset,val_subset,test_subset,hParams)
+    model = buildModel(train_subset,val_subset,test_subset,hParams)
     # model = load_model('stock.h5')
     # # Use your LSTM model to predict the stock prices for the given ticker
     _,_, test_data = preprocessing(df,hParams)
 
     test_x, test_y, test_scaler =  generate_data(test_data, hParams['look_back'])
-    model = load_model('stock.h5')
     predicted_prices = model.predict(test_x)
     predicted_prices = test_scaler.inverse_transform(predicted_prices)
     
